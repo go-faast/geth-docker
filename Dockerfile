@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
 # Install geth
 
 RUN add-apt-repository -y ppa:ethereum/ethereum && apt-get update && apt-get install -y -q ethereum
+
+# docker run --name=gethdata -v /gethdata busybox chown 1000:1000 /gethdata
 RUN mkdir /gethdata
 EXPOSE 30303 8541 8542
 ENTRYPOINT ["geth", \
@@ -39,3 +41,4 @@ ENTRYPOINT ["geth", \
             "--wsorigins", "*", \
             "--datadir", "/gethdata", \
             "--fast"]
+            
