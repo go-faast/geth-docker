@@ -40,5 +40,5 @@ ENTRYPOINT ["geth", \
             "--wsapi", "web3,eth,pubsub,net", \
             "--wsorigins", "*", \
             "--datadir", "/gethdata", \
+            "--txpool.nolocals", \
             "--fast"]
-            
