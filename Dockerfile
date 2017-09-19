@@ -1,7 +1,7 @@
 
 FROM ubuntu:16.04
 MAINTAINER Moe Adham <moe@bitaccess.co>
-
+ADD version /root/version
 # Install base dependencies
 RUN apt-get update && apt-get install -y -q --no-install-recommends \
         apt-transport-https \
