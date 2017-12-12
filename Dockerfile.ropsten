@@ -24,28 +24,29 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
 
 RUN add-apt-repository -y ppa:ethereum/ethereum && apt-get update && apt-get install -y -q ethereum && echo "VERSION 1.7.3"
 
-# docker run --name=gethdata -v /gethdata busybox chown 1000:1000 /gethdata
+# docker run --name=gethdata-ropsten -v /gethdata busybox chown 1000:1000 /gethdata
 RUN mkdir /gethdata
-EXPOSE 30303 8541 8542
+EXPOSE 30304 8545 8546
 ENTRYPOINT ["geth", \
-            "--port", "30303", \
+            "--testnet", \
+            "--port", "30304", \
             "--rpc", \
             "--rpcaddr", "0.0.0.0", \
-            "--rpcport", "8541", \
+            "--rpcport", "8545", \
             "--rpcapi", "eth,net,web3", \
             "--rpccorsdomain", "*", \
             "--ws", \
             "--wsaddr", "0.0.0.0", \
-            "--wsport", "8542", \
+            "--wsport", "8546", \
             "--wsapi", "web3,eth,pubsub,net", \
             "--wsorigins", "*", \
             "--datadir", "/gethdata", \
             "--txpool.journal", "72h0m0s", \
             "--txpool.pricelimit", "0", \
-            "--txpool.accountslots", "429496729",\
-            "--txpool.globalslots", "4294967295",\
-            "--txpool.accountqueue", "429496729", \
-            "--txpool.globalqueue", "4294967295", \
+            "--txpool.accountslots", "42949672",\
+            "--txpool.globalslots", "429496729",\
+            "--txpool.accountqueue", "42949672", \
+            "--txpool.globalqueue", "429496729", \
             "--txpool.lifetime", "72h0m0s", \
             "--cache", "8000", \
             "--syncmode", "fast"]

@@ -24,19 +24,20 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
 
 RUN add-apt-repository -y ppa:ethereum/ethereum && apt-get update && apt-get install -y -q ethereum && echo "VERSION 1.7.3"
 
-# docker run --name=gethdata -v /gethdata busybox chown 1000:1000 /gethdata
+# docker run --name=gethdata-rinkeby -v /gethdata busybox chown 1000:1000 /gethdata
 RUN mkdir /gethdata
-EXPOSE 30303 8541 8542
+EXPOSE 30305 8547 8548
 ENTRYPOINT ["geth", \
-            "--port", "30303", \
+            "--rinkeby", \
+            "--port", "30305", \
             "--rpc", \
             "--rpcaddr", "0.0.0.0", \
-            "--rpcport", "8541", \
+            "--rpcport", "8547", \
             "--rpcapi", "eth,net,web3", \
             "--rpccorsdomain", "*", \
             "--ws", \
             "--wsaddr", "0.0.0.0", \
-            "--wsport", "8542", \
+            "--wsport", "8548", \
             "--wsapi", "web3,eth,pubsub,net", \
             "--wsorigins", "*", \
             "--datadir", "/gethdata", \
